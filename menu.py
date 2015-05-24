@@ -24,8 +24,8 @@ class Button(object):
     def draw(self, mouse, screen2, left, top, width, height):
         rectcoords = (left, top, width, height)
         print self.colourchooser()
-        self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
         self.check_hover(mouse)
+        self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
     def check_hover(self, mouse):
         if self.rect.collidepoint(mouse):
            self.hover = True
