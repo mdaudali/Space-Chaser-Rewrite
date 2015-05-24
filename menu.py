@@ -9,6 +9,7 @@ size = width, height = 888, 660 #screen size
 screen = pygame.display.set_mode(size) #sets the screen size
 menu = pygame.image.load("menuart.png").convert() #gets menu code and converts into optimised format
 logo = pygame.image.load("logo.png").convert() #same for logo
+logo.set_colorkey(BLACK)
 class Button(object): #button class
     def __init__(self, text):
         self.text = text #text for label
