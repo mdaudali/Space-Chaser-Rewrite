@@ -31,7 +31,7 @@ class Button(object):
         rectcoords = (left, top, width, height)
         self.check_hover(mouse)
         self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
-        screen.blit(self.label(), (((self.rect.right - self.rect.left)/2 + self.rect.left) - ((self.label().get_rect().right - self.label().get_rect().left)/2), ((self.rect.bottom - self.rect.top)/2 + self.rect.top) - ((self.label().get_rect().bottom - self.label().get_rect().top)/2)))
+        screen.blit(self.label(), (((self.rect.right - self.rect.left)/2 + self.rect.left) - ((self.label().get_rect().right - self.label().get_rect().left)/2), ((self.rect.bottom - self.rect.top)/2 + self.rect.top) - ((self.label().get_rect().bottom - self.label().get_rect().top)/2))) #midpoint of box - midpoint text
     def check_hover(self, mouse):
         if self.rect.collidepoint(mouse):
            self.hover = True
