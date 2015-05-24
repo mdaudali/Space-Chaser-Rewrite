@@ -14,7 +14,7 @@ class Button:
         self.hover = False
         self.colour = (GREEN)
         self.hover_colour = (RED)
-        self.obj = None
+        self.obj = ""
     def colourchooser(self):
         if self.hover:
             return self.hover_colour
@@ -22,12 +22,13 @@ class Button:
             return self.colour
     def draw(self, mouse, screen2, rectcoords):
         self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
-        self.check_hover(mouse)
-    def check_hover(self, mouse):
-        if self.obj.collidepoint(mouse):
-            self.hover = True
-        else:
-            self.hover = False
+        #   self.obj = pygame.Rect(hello)
+        #self.check_hover(mouse)
+    #def check_hover(self, mouse):
+        #if self.obj.collidepoint(mouse):
+         #   self.hover = True
+        #else:
+           # self.hover = False
 while 1:
     mouse = pygame.mouse.get_pos()
     btn = Button()
@@ -39,4 +40,8 @@ while 1:
     screen.blit(menu, [0,0])
     screen.blit(logo, [133.5,56.5])
     btn.draw(mouse, screen, (393.5,450,100,50))
+    if btn.obj.collidepoint(mouse):
+        btn.hover = True
+    else:
+        btn.hover= False
     pygame.display.flip()
