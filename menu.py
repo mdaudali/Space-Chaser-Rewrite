@@ -9,39 +9,37 @@ size = width, height = 888, 660
 screen = pygame.display.set_mode(size)
 menu = pygame.image.load("menuart.png").convert()
 logo = pygame.image.load("logo.png").convert()
-class Button:
+class Button(object):
     def __init__(self):
+        self.rect = pygame.Rect(393.5,450, 100,50)
         self.hover = False
         self.colour = (GREEN)
         self.hover_colour = (RED)
-        self.obj = ""
+        self.obj = None
     def colourchooser(self):
         if self.hover:
             return self.hover_colour
         else:
             return self.colour
-    def draw(self, mouse, screen2, rectcoords):
+    def draw(self, mouse, screen2, left, top, width, height):
+        rectcoords = (left, top, width, height)
+        print self.colourchooser()
         self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
-        #   self.obj = pygame.Rect(hello)
-        #self.check_hover(mouse)
-    #def check_hover(self, mouse):
-        #if self.obj.collidepoint(mouse):
-         #   self.hover = True
-        #else:
-           # self.hover = False
+        self.check_hover(mouse)
+    def check_hover(self, mouse):
+        if self.rect.collidepoint(mouse):
+           self.hover = True
+        else:
+           self.hover = False
 while 1:
     mouse = pygame.mouse.get_pos()
     btn = Button()
     for event in pygame.event.get():
         if event.type == pygame.QUIT: pygame.quit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if btn.obj.collidepoint(mouse):
+            if btn.rect.collidepoint(mouse):
                 print("button one clicked")
     screen.blit(menu, [0,0])
     screen.blit(logo, [133.5,56.5])
-    btn.draw(mouse, screen, (393.5,450,100,50))
-    if btn.obj.collidepoint(mouse):
-        btn.hover = True
-    else:
-        btn.hover= False
+    btn.draw(mouse, screen, 393.5, 450,100,50)
     pygame.display.flip()
