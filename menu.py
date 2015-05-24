@@ -31,7 +31,9 @@ class Button(object):
         rectcoords = (left, top, width, height)
         self.check_hover(mouse)
         self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
-        screen.blit(self.label(), (((self.rect.right - self.rect.left)/2 + self.rect.left) - ((self.label().get_rect().right - self.label().get_rect().left)/2), ((self.rect.bottom - self.rect.top)/2 + self.rect.top) - ((self.label().get_rect().bottom - self.label().get_rect().top)/2)))
+        text_x = ((self.rect.right - self.rect.left)/2 + self.rect.left) - ((self.label().get_rect().right - self.label().get_rect().left)/2)
+        text_y = ((self.rect.bottom - self.rect.top)/2 + self.rect.top) - ((self.label().get_rect().bottom - self.label().get_rect().top)/2)
+        screen.blit(self.label(), (text_x, text_y)) #midpoint of box - midpoint text
     def check_hover(self, mouse):
         if self.rect.collidepoint(mouse):
            self.hover = True
@@ -39,7 +41,7 @@ class Button(object):
            self.hover = False
 while 1:
     mouse = pygame.mouse.get_pos()
-    btn = Button("Button yolo")
+    btn = Button("Testing sizes")
     for event in pygame.event.get():
         if event.type == pygame.QUIT: pygame.quit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
