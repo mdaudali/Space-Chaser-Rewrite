@@ -10,12 +10,18 @@ screen = pygame.display.set_mode(size)
 menu = pygame.image.load("menuart.png").convert()
 logo = pygame.image.load("logo.png").convert()
 class Button(object):
-    def __init__(self):
+    def __init__(self, text):
+        self.text = text
+        self.font_colour = (BLACK)
         self.rect = pygame.Rect(393.5,450, 100,50)
         self.hover = False
         self.colour = (GREEN)
         self.hover_colour = (RED)
         self.obj = None
+    def label(self):
+      '''button label font'''
+      font = pygame.font.Font(None, 20)
+      return font.render(self.text, 1, self.font_colour)
     def colourchooser(self):
         if self.hover:
             return self.hover_colour
@@ -23,9 +29,11 @@ class Button(object):
             return self.colour
     def draw(self, mouse, screen2, left, top, width, height):
         rectcoords = (left, top, width, height)
-        print self.colourchooser()
         self.check_hover(mouse)
         self.obj = pygame.draw.rect(screen2, self.colourchooser(), rectcoords)
+        print ((self.label().get_rect().right - self.label().get_rect().left) + self.rect.left)
+        print ((self.label().get_rect().top - self.label().get_rect().bottom) +self.rect.top)
+        screen.blit(self.label(), (((self.rect.right - self.rect.left)/2 + self.rect.left) - ((self.label().get_rect().right - self.label().get_rect().left)/2), ((self.rect.bottom - self.rect.top)/2 + self.rect.top) - ((self.label().get_rect().bottom - self.label().get_rect().top)/2)))
     def check_hover(self, mouse):
         if self.rect.collidepoint(mouse):
            self.hover = True
@@ -33,7 +41,7 @@ class Button(object):
            self.hover = False
 while 1:
     mouse = pygame.mouse.get_pos()
-    btn = Button()
+    btn = Button("Button yolo")
     for event in pygame.event.get():
         if event.type == pygame.QUIT: pygame.quit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
